@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -26,6 +25,11 @@ namespace MovieShopAPI.Controllers
         [Route("register")]
         public async Task<IActionResult> Register(RegisterModel model)
         {
+            // 2XX  200 OK, 201 Created
+            // 3XX
+            // 4XX 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404
+            // 5XX 500 => Internal server error
+
             if (!ModelState.IsValid)
             {
                 // 400 Bad request
@@ -44,7 +48,7 @@ namespace MovieShopAPI.Controllers
             {
                 return BadRequest();
             }
-            //check the email and password
+            //check the email/pw
 
             var user = await _accountService.ValidateUser(model.Email, model.Password);
             if (user == null)
