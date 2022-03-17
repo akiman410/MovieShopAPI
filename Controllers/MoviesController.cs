@@ -37,7 +37,6 @@ namespace MovieShopAPI.Controllers
             return Ok(movie);
 
             // in old .net for JSON serialization we used JSON.NET librray => very very popular
-            // System.Te
         }
     }
 }
